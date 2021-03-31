@@ -123,6 +123,50 @@
               "devServerTarget": "input-mask:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
+        }
+      }
+    },
+    "@ngneat/input-mask": {
+      "projectType": "library",
+      "root": "projects/ngneat/input-mask",
+      "sourceRoot": "projects/ngneat/input-mask/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/ngneat/input-mask/tsconfig.lib.json",
+            "project": "projects/ngneat/input-mask/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngneat/input-mask/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngneat/input-mask/src/test.ts",
+            "tsConfig": "projects/ngneat/input-mask/tsconfig.spec.json",
+            "karmaConfig": "projects/ngneat/input-mask/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngneat/input-mask/tsconfig.lib.json",
+              "projects/ngneat/input-mask/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
         }
       }
     }
