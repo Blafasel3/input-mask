@@ -19,7 +19,6 @@
     "postbuild:lib": "npm run build --prefix projects/ngneat/input-mask",
     "semantic-release": "semantic-release"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~11.2.7",
     "@angular/common": "~11.2.7",
@@ -38,36 +37,37 @@
     "@angular-devkit/build-angular": "~0.1102.6",
     "@angular/cli": "~11.2.6",
     "@angular/compiler-cli": "~11.2.7",
+    "@commitlint/cli": "^12.0.1",
+    "@commitlint/config-conventional": "^12.0.1",
+    "@ngneat/spectator": "^7.1.0",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
+    "all-contributors-cli": "^6.20.0",
+    "angular-cli-ghpages": "^1.0.0-rc.1",
     "codelyzer": "^6.0.0",
+    "cpx": "^1.5.0",
+    "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "git-cz": "^4.7.6",
+    "husky": "^5.1.2",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
+    "jsonc-parser": "^3.0.0",
     "karma": "~6.1.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "lint-staged": "^10.5.4",
     "ng-packagr": "^11.0.0",
+    "prettier": "^2.2.1",
     "protractor": "~7.0.0",
+    "semantic-release": "^17.3.8",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.1.5",
-    "cpx": "^1.5.0",
-    "jsonc-parser": "^3.0.0",
-    "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/git": "^9.0.0",
-    "semantic-release": "^17.3.8",
-    "@commitlint/cli": "^12.0.1",
-    "@commitlint/config-conventional": "^12.0.1",
-    "git-cz": "^4.7.6",
-    "all-contributors-cli": "^6.20.0",
-    "lint-staged": "^10.5.4",
-    "prettier": "^2.2.1",
-    "husky": "^5.1.2",
-    "cross-env": "^7.0.3",
-    "@ngneat/spectator": "^7.1.0",
-    "angular-cli-ghpages": "^1.0.0-rc.1"
+    "typescript": "~4.1.5"
   },
   "config": {
     "commitizen": {
@@ -84,5 +84,12 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "npm run hooks:pre-commit && lint-staged"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ngneat/input-mask.git"
+  },
+  "publishConfig": {
+    "access": "restricted"
   }
 }

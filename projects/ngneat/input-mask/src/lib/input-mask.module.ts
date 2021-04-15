@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { InputMaskComponent } from './input-mask.component';
+import { InputMaskDirective } from './input-mask.directive';
 
 
 
 @NgModule({
-  declarations: [InputMaskComponent],
+  declarations: [InputMaskDirective],
   imports: [
   ],
-  exports: [InputMaskComponent]
+  exports: [InputMaskDirective]
 })
 export class InputMaskModule { }
