@@ -17,7 +17,8 @@
     "test:lib": "ng test @ngneat/input-mask",
     "test:lib:headless": "cross-env CI=true npm run test:lib",
     "postbuild:lib": "npm run build --prefix projects/ngneat/input-mask",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@angular/animations": "~11.2.7",
@@ -62,7 +63,7 @@
     "eslint-plugin-jsdoc": "30.7.6",
     "eslint-plugin-prefer-arrow": "1.2.2",
     "git-cz": "^4.7.6",
-    "husky": "^5.1.2",
+    "husky": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "jsonc-parser": "^3.0.0",
@@ -88,13 +89,8 @@
   "lint-staged": {
     "*.{js,json,css,scss,ts,html,component.html}": [
       "prettier --write"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm run hooks:pre-commit && lint-staged"
-    }
+    ],
+    "*.ts": "eslint --cache --fix"
   },
   "repository": {
     "type": "git",
