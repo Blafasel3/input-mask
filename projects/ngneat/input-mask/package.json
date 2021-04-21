@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "peerDependencies": {
     "@angular/common": "^11.2.7",
-    "@angular/core": "^11.2.7"
+    "@angular/core": "^11.2.7",
+    "inputmask": "^5.0.5"
   },
   "dependencies": {
     "tslib": "^2.0.0"
