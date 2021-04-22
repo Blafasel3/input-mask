@@ -1,6 +1,18 @@
 <h2>Simple Input</h2>
-<input [inputMask]="'99-9999999'" placeholder="Input Mask" />
-
+<h3>Patterns</h3>
+<p>--------------</p>
+<h4>Date</h4>
+<input [inputMask]="dateInputMask" placeholder="Date Mask" />
+<pre><code>{{ dateInputMask | json }}</code></pre>
+<p>--------------</p>
+<h4>Currency</h4>
+<input [inputMask]="currencyInputMask" placeholder="Currency Mask" />
+<pre><code>{{ currencyInputMask | json }}</code></pre>
+<p>--------------</p>
+<h4>License plate:</h4>
+<input [inputMask]="licensePlateInputMask" placeholder="License Plate" />
+<pre><code>{{ licensePlateInputMask | json }}</code></pre>
+<p>--------------</p>
 <hr />
 
 <h2>Reactive Form</h2>
@@ -9,4 +21,4 @@
   [inputMask]="ipAddressMask"
   placeholder="IP Address"
 />
-Valid: {{ ipAddress.valid }}
+Valid: {{ ipAddress.valid }} | Value: {{ ipAddress.value }}
