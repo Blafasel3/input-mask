@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { inputMaskValidator } from '@ngneat/input-mask';
 
 @Component({
   selector: 'app-root',
@@ -27,5 +26,5 @@ export class AppComponent {
   };
 
   ipAddressMask: Inputmask.Options = { alias: 'ip' };
-  ipAddress = new FormControl('', inputMaskValidator(this.ipAddressMask));
+  ipAddress = new FormControl('');
 }

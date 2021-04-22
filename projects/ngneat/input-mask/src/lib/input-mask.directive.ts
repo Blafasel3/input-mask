@@ -1,36 +1,38 @@
 import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, NG_VALIDATORS, Validator } from '@angular/forms';
 import Inputmask from 'inputmask';
 
 @Directive({
   selector: '[inputMask]',
+  providers: [
+    {
+      provide: NG_VALIDATORS,
+      useExisting: InputMaskDirective,
+      multi: true,
+    },
+  ],
 })
-export class InputMaskDirective implements AfterViewInit {
-  @Input() inputMask: string | undefined | Inputmask.Options;
+export class InputMaskDirective implements Validator, AfterViewInit {
+  @Input() inputMask: string | Inputmask.Options = '';
   @Input() inputMaskOptions: Inputmask.Options = {};
   inputMaskPlugin: Inputmask.Instance | undefined;
   constructor(private el: ElementRef) {}
 
   ngAfterViewInit() {
     if (this.inputMask) {
-      let im: Inputmask.Instance;
-      switch (true) {
-        case typeof this.inputMask === 'object':
-          im = new Inputmask(this.inputMask as Inputmask.Options);
-          break;
-        default:
-          im = new Inputmask(this.inputMask as string, this.inputMaskOptions);
-          break;
-      }
-      this.inputMaskPlugin = im.mask(this.el.nativeElement);
+      this.inputMask =
+        typeof this.inputMask === 'string'
+          ? { mask: this.inputMask, ...this.inputMaskOptions }
+          : this.inputMask;
+      this.inputMaskPlugin = new Inputmask(this.inputMask).mask(
+        this.el.nativeElement
+      );
     }
   }
-}
 
-export const inputMaskValidator = (
-  mask: string | Inputmask.Options
-): ValidatorFn => (control: AbstractControl): { [key: string]: any } | null => {
-    mask = typeof mask === 'string' ? { mask } : mask;
-    const isInputMaskValid = Inputmask.isValid(control.value, mask);
-    return !isInputMaskValid ? { inputMask: { value: control.value } } : null;
-  };
+  validate(control: AbstractControl): { [key: string]: any } | null {
+    return Inputmask.isValid(control.value, this.inputMask as Inputmask.Options)
+      ? null
+      : { inputMask: false };
+  }
+}

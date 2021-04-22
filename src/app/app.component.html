@@ -21,4 +21,5 @@
   [inputMask]="ipAddressMask"
   placeholder="IP Address"
 />
-Valid: {{ ipAddress.valid }} | Value: {{ ipAddress.value }}
+Valid: {{ ipAddress.valid }} | Value: {{ ipAddress.value }} | Errors:
+{{ ipAddress.errors | json }}
