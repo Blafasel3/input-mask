@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { createMask } from '@ngneat/input-mask';
 
 @Component({
   selector: 'app-root',
@@ -9,22 +10,22 @@ import { FormControl } from '@angular/forms';
 export class AppComponent {
   title = 'input-mask';
 
-  dateInputMask: Inputmask.Options = {
+  dateInputMask = createMask({
     alias: 'datetime',
     inputFormat: 'dd/mm/yyyy',
-  };
-  currencyInputMask: Inputmask.Options = {
+  });
+  currencyInputMask = createMask({
     alias: 'numeric',
     groupSeparator: ',',
     digits: 2,
     digitsOptional: false,
     prefix: '$ ',
     placeholder: '0',
-  };
-  licensePlateInputMask: Inputmask.Options = {
+  });
+  licensePlateInputMask = createMask({
     mask: '[9-]AAA-999',
-  };
+  });
 
-  ipAddressMask: Inputmask.Options = { alias: 'ip' };
+  ipAddressMask = createMask({ alias: 'ip' });
   ipAddress = new FormControl('');
 }

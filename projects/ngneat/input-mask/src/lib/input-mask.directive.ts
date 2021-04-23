@@ -13,17 +13,12 @@ import Inputmask from 'inputmask';
   ],
 })
 export class InputMaskDirective implements Validator, AfterViewInit {
-  @Input() inputMask: string | Inputmask.Options = '';
-  @Input() inputMaskOptions: Inputmask.Options = {};
+  @Input() inputMask: Inputmask.Options = {};
   inputMaskPlugin: Inputmask.Instance | undefined;
   constructor(private el: ElementRef) {}
 
   ngAfterViewInit() {
-    if (this.inputMask) {
-      this.inputMask =
-        typeof this.inputMask === 'string'
-          ? { mask: this.inputMask, ...this.inputMaskOptions }
-          : this.inputMask;
+    if (Object.keys(this.inputMask).length) {
       this.inputMaskPlugin = new Inputmask(this.inputMask).mask(
         this.el.nativeElement
       );
@@ -36,3 +31,6 @@ export class InputMaskDirective implements Validator, AfterViewInit {
       : { inputMask: false };
   }
 }
+export const createMask = (
+  options: string | Inputmask.Options
+): Inputmask.Options => typeof options === 'string' ? { mask: options } : options;
