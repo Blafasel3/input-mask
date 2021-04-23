@@ -22,9 +22,7 @@ export class AppComponent {
     prefix: '$ ',
     placeholder: '0',
   });
-  licensePlateInputMask = createMask({
-    mask: '[9-]AAA-999',
-  });
+  licensePlateInputMask = createMask('[9-]AAA-999');
 
   ipAddressMask = createMask({ alias: 'ip' });
   ipAddress = new FormControl('');

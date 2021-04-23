@@ -13,6 +13,11 @@ import Inputmask from 'inputmask';
   ],
 })
 export class InputMaskDirective implements Validator, AfterViewInit {
+  /**
+   *Helps you to create input-mask based on https://github.com/RobinHerbots/Inputmask
+   *Supports form-validation out-of-the box.
+   *Visit https://github.com/ngneat/input-mask for more info.
+   */
   @Input() inputMask: Inputmask.Options = {};
   inputMaskPlugin: Inputmask.Instance | undefined;
   constructor(private el: ElementRef) {}
@@ -31,6 +36,8 @@ export class InputMaskDirective implements Validator, AfterViewInit {
       : { inputMask: false };
   }
 }
+
 export const createMask = (
   options: string | Inputmask.Options
-): Inputmask.Options => typeof options === 'string' ? { mask: options } : options;
+): Inputmask.Options =>
+  typeof options === 'string' ? { mask: options } : options;
