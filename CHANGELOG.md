@@ -1,3 +1,10 @@
+# [1.0.0-beta.2](https://github.com/ngneat/input-mask/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2021-04-28)
+
+
+### Bug Fixes
+
+* **schematics:** fix import statement and external dep ([48e20a5](https://github.com/ngneat/input-mask/commit/48e20a5ab19f2cc4f1bdf460c8773d60c8e63779))
+
 # 1.0.0-beta.1 (2021-04-28)
 
 
