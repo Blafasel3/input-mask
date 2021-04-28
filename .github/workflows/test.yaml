@@ -21,7 +21,7 @@ jobs:
           npm ci
           npm run lint
           npm run build -- --prod
-          npm run test -- --watch=false --browsers=ChromeHeadless
+          npm run test -- --project=@ngneat/input-mask --watch=false --browsers=ChromeHeadless
           npm run build:lib
 
       - name: Trigger release workflow
