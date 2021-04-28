@@ -5,8 +5,7 @@
     "next",
     "next-major",
     { "name": "beta", "prerelease": true },
-    { "name": "alpha", "prerelease": true },
-    { "name": "development", "prerelease": true }
+    { "name": "alpha", "prerelease": true }
   ],
   "preset": "angular",
   "plugins": [
