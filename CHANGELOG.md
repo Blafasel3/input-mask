@@ -1,3 +1,10 @@
+# [1.0.0-beta.3](https://github.com/ngneat/input-mask/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2021-04-28)
+
+
+### Bug Fixes
+
+* **schematics:** add dev dependency ([56ed59e](https://github.com/ngneat/input-mask/commit/56ed59e971adae561d9db78d2005af7b895c4876))
+
 # [1.0.0-beta.2](https://github.com/ngneat/input-mask/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2021-04-28)
 
 
