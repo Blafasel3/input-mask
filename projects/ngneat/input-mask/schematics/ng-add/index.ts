@@ -63,6 +63,19 @@ const addPackageJsonDependencies = (): Rule => (
     addPackageToPackageJson(host, dependency.name, `${dependency.version}`);
     context.logger.log('info', `✅️ Added "${dependency.name}`);
   });
+  const devDependencies: { name: string; version: string }[] = [
+    { name: '@types/inputmask', version: '5.0.0' },
+  ];
+
+  devDependencies.forEach((dependency) => {
+    addPackageToPackageJson(
+      host,
+      dependency.name,
+      `${dependency.version}`,
+      'devDependencies'
+    );
+    context.logger.log('info', `✅️ Added "${dependency.name}`);
+  });
 
   return host;
 };
