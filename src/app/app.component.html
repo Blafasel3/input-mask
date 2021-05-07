@@ -23,3 +23,7 @@
 />
 Valid: {{ ipAddress.valid }} | Value: {{ ipAddress.value }} | Errors:
 {{ ipAddress.errors | json }}
+<p>--------------</p>
+<input [formControl]="dateFC" [inputMask]="dateInputMask" placeholder="Date" />
+Valid: {{ dateFC.valid }} | Value: {{ dateFC.value }} | Errors:
+{{ dateFC.errors | json }}
