@@ -4,7 +4,6 @@ import {
   ElementRef,
   HostListener,
   Input,
-  Renderer2,
 } from '@angular/core';
 import {
   AbstractControl,
