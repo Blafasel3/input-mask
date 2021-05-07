@@ -29,7 +29,7 @@ import Inputmask from 'inputmask';
     },
   ],
 })
-export class InputMaskDirective<T>
+export class InputMaskDirective<T = any>
   implements Validator, AfterViewInit, ControlValueAccessor {
   /**
    *Helps you to create input-mask based on https://github.com/RobinHerbots/Inputmask
