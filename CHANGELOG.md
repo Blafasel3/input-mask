@@ -1,3 +1,10 @@
+# [1.0.0-beta.4](https://github.com/ngneat/input-mask/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-05-07)
+
+
+### Features
+
+* **input-mask:** allow users to pass parser to transform value ([ba225db](https://github.com/ngneat/input-mask/commit/ba225dbd4cb698ea58cdfd5f232bca79f1e9a41a))
+
 # [1.0.0-beta.3](https://github.com/ngneat/input-mask/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2021-04-28)
 
 
