@@ -1,3 +1,10 @@
+# [1.0.0-beta.5](https://github.com/ngneat/input-mask/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2021-05-12)
+
+
+### Bug Fixes
+
+* **input-mask.directive:** validate only input value and not control value ([06ded54](https://github.com/ngneat/input-mask/commit/06ded54f2d2408e69d44f3bc22fde49bc5c0ecaa))
+
 # [1.0.0-beta.4](https://github.com/ngneat/input-mask/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2021-05-07)
 
 
