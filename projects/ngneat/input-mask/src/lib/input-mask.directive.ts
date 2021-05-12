@@ -74,9 +74,8 @@ export class InputMaskDirective<T = any>
     }
   }
 
-  validate(control: AbstractControl): { [key: string]: any } | null {
-    return (this.inputMaskPlugin && this.inputMaskPlugin.isValid()) ||
-      Inputmask.isValid(control.value, this.inputMaskOptions)
+  validate(): { [key: string]: any } | null {
+    return this.inputMaskPlugin && this.inputMaskPlugin.isValid()
       ? null
       : { inputMask: false };
   }
