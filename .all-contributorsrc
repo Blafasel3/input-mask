@@ -9,6 +9,21 @@
   "imageSize": 100,
   "commit": true,
   "commitConvention": "angular",
-  "contributors": [],
+  "contributors": [
+    {
+      "login": "shhdharmen",
+      "name": "Dharmen Shah",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6831283?v=4",
+      "profile": "https://github.com/shhdharmen",
+      "contributions": [
+        "code",
+        "content",
+        "doc",
+        "example",
+        "maintenance",
+        "platform"
+      ]
+    }
+  ],
   "contributorsPerLine": 7
 }
