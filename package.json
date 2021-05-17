@@ -1,6 +1,7 @@
 {
   "name": "input-mask",
   "version": "0.0.0",
+  "description": "@ngneat/input-mask is an angular library that creates an input mask.",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
