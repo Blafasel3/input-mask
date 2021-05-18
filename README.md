@@ -1,5 +1,6 @@
+# @ngneat/input-mask
+
 <p align="center">
-  <h1>@ngneat/input-mask</h1>
   <img width="20%" height="20%" src="./logo.svg">
 </p>
 

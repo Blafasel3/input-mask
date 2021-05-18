@@ -52,15 +52,9 @@ export class InputMaskDirective<T = any>
 
   registerOnChange(fn: (_: T | null) => void): void {
     const parser = this.inputMask.parser;
-    if (parser) {
-      this.onInput = (value) => {
-        fn(parser(value));
-      };
-    } else {
-      this.onInput = (value) => {
-        fn(value);
-      };
-    }
+    this.onInput = (value) => {
+      fn(parser ? parser(value) : value);
+    };
   }
 
   registerOnTouched(fn: any): void {}
