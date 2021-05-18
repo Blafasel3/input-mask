@@ -54,7 +54,11 @@ import { InputMaskModule } from '@ngneat/input-mask';
 class AppModule {}
 ```
 
-## Basic Usage
+## Usage examples
+
+### 1. Date
+
+![](./date.mov)
 
 ```typescript
 import { Component } from '@angular/core';
@@ -84,7 +88,82 @@ export class AppComponent {
 }
 ```
 
-Full example available on [stackblitz](https://stackblitz.com/edit/angular-ivy-6greu1?file=src/app/app.component.ts).
+### 2. IP Address
+
+![](./ip.mov)
+
+```typescript
+@Component({
+  template: `
+    <input [inputMask]="ipAddressMask" [formControl]="ipFC" placeholder="_._._._">
+  `,
+})
+export class AppComponent {
+  ipAddressMask = createMask({ alias: 'ip' });
+  ipFC = new FormControl('');
+}
+```
+
+### 3. Currency
+
+![](./currency.mov)
+
+```typescript
+@Component({
+  template: `
+    <input [inputMask]="currencyInputMask" [formControl]="currencyFC" placeholder="$ 0.00">
+  `,
+})
+export class AppComponent {
+  currencyInputMask = createMask({
+    alias: 'numeric',
+    groupSeparator: ',',
+    digits: 2,
+    digitsOptional: false,
+    prefix: '$ ',
+    placeholder: '0',
+  });
+  currencyFC = new FormControl('');
+}
+```
+
+### 4. License Plate
+
+![](./license.mov)
+
+```typescript
+@Component({
+  template: `
+    <input [inputMask]="licenseInputMask" [formControl]="licenseFC" placeholder="___-___">
+  `,
+})
+export class AppComponent {
+  licenseInputMask = createMask('[9-]AAA-999');
+  licenseFC = new FormControl('');
+}
+```
+
+### 5. Email
+
+![](./email.mov)
+
+```typescript
+@Component({
+  template: `
+    <input [inputMask]="emailInputMask" [formControl]="emailFC" placeholder="_@_._">
+  `,
+})
+export class AppComponent {
+  emailInputMask = createMask({ alias: 'email'});
+  emailFC = new FormControl('');
+}
+```
+
+### More examples
+
+All examples are available on [stackblitz](https://stackblitz.com/edit/angular-ivy-6greu1?file=src/app/app.component.ts).
+
+You can create any type of input-mask which is supported by [InputMask plugin](https://github.com/RobinHerbots/inputmask).
 
 ## Validation
 
