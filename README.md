@@ -1,4 +1,6 @@
-# @ngneat/input-mask
+<h1 align="center">
+  @ngneat/input-mask
+</h1>
 
 <p align="center">
   <img width="20%" height="20%" src="./logo.svg">
@@ -6,6 +8,7 @@
 
 <br />
 
+[![npm (scoped)](https://img.shields.io/npm/v/@ngneat/input-mask?style=flat-square)](https://www.npmjs.com/package/@ngneat/input-mask)
 [![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg?style=flat-square)](https://github.com/ngneat/input-mask/blob/main/LICENSE)
 [![commitizen](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)]()
 [![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/ngneat/input-mask/pulls)
@@ -13,7 +16,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
 [![ngneat-lib](https://img.shields.io/badge/made%20with-%40ngneat%2Flib-ad1fe3?logo=angular)](https://github.com/ngneat/lib)
 [![spectator](https://img.shields.io/badge/tested%20with-spectator-2196F3.svg?style=flat-square)]()
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
 
 > @ngneat/input-mask is an angular library that creates an input mask. Behind the scene, it uses [inputmask](https://github.com/RobinHerbots/Inputmask).
 
@@ -82,6 +85,53 @@ export class AppComponent {
 ```
 
 Full example available on [stackblitz](https://stackblitz.com/edit/angular-ivy-6greu1?file=src/app/app.component.ts).
+
+## Validation
+
+When `[inputMask]` is used with `[formControl]`, it adds validation out-of-the box. The validation works based on [`isValid`](https://github.com/RobinHerbots/Inputmask#isvalid) function.
+
+If the validation fails, the form-control will have below error:
+
+```json
+{ inputMask: false }
+```
+
+## `createMask` wrapper function
+
+This library uses [inputmask](https://github.com/RobinHerbots/Inputmask) plugin to handle mask related tasks. So, you can use all the [options](https://github.com/RobinHerbots/Inputmask#options) available there.
+
+The recommended way to create an inputmask is to use the `createMask` function provided with this library.
+
+### `parser` function
+
+Apart from inputmask options, we have added one more option called `parser`. This basically helps you to keep the value of form-control in pre-defined format, without updating UI.
+
+For example, you want your users to enter date in `input[type=text]` with `dd/mm/yyyy` format and you want to store a `Date` value in the form-control:
+
+```typescript
+@Component({
+  template: `
+    <input [inputMask]="dateInputMask" [formControl]="dateFC" placeholder="dd/mm/yyyy">
+  `,
+})
+export class AppComponent {
+  dateInputMask = createMask<Date>({
+    alias: 'datetime',
+    inputFormat: 'dd/mm/yyyy',
+    parser: (value: string) => {
+      const values = value.split('/');
+      const year = +values[2];
+      const month = +values[1] - 1;
+      const date = +values[0];
+      return new Date(year, month, date);
+    },
+  });
+
+  dateFC = new FormControl('');
+}
+```
+
+In above example, whenver you try to access `dateFC.value`, it won't be the string which user entered, but rather a `Date` created based on the `parser` function.
 
 ## Contributors ✨
 
