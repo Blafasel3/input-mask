@@ -58,7 +58,7 @@ class AppModule {}
 
 ### 1. Date
 
-![](./date.mov)
+![](./date.gif)
 
 ```typescript
 import { Component } from '@angular/core';
@@ -90,7 +90,7 @@ export class AppComponent {
 
 ### 2. IP Address
 
-![](./ip.mov)
+![](./ip.gif)
 
 ```typescript
 @Component({
@@ -106,7 +106,7 @@ export class AppComponent {
 
 ### 3. Currency
 
-![](./currency.mov)
+![](./currency.gif)
 
 ```typescript
 @Component({
@@ -129,7 +129,7 @@ export class AppComponent {
 
 ### 4. License Plate
 
-![](./license.mov)
+![](./license.gif)
 
 ```typescript
 @Component({
@@ -145,7 +145,7 @@ export class AppComponent {
 
 ### 5. Email
 
-![](./email.mov)
+![](./email.gif)
 
 ```typescript
 @Component({
