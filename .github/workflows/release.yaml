@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-  repository_dispatch:
-    types: [trigger-release]
 
 jobs:
   build:
@@ -18,7 +16,7 @@ jobs:
         with:
           node-version: "12.x"
 
-      - name: NPM install, lint, build, test and release
+      - name: NPM install, build, and release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

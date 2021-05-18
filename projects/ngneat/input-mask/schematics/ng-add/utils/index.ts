@@ -66,7 +66,8 @@ const sortObjectByKeys = (obj: {
 export const addPackageToPackageJson = (
   host: Tree,
   pkg: string,
-  version: string
+  version: string,
+  type: 'dependencies' | 'devDependencies' = 'dependencies'
 ): Tree => {
   if (host.exists('package.json')) {
     const buff = host.read('package.json');
@@ -78,9 +79,9 @@ export const addPackageToPackageJson = (
         json.devDependencies = {};
       }
 
-      if (!json.dependencies[pkg]) {
-        json.dependencies[pkg] = version;
-        json.dependencies = sortObjectByKeys(json.dependencies);
+      if (!json[type][pkg]) {
+        json[type][pkg] = version;
+        json[type] = sortObjectByKeys(json[type]);
       }
 
       host.overwrite('package.json', JSON.stringify(json, null, 2));
