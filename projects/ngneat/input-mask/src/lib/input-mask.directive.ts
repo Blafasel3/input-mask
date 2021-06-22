@@ -4,32 +4,20 @@ import {
   ElementRef,
   HostListener,
   Input,
+  OnInit,
+  Optional,
+  Renderer2,
+  Self,
 } from '@angular/core';
-import {
-  ControlValueAccessor,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
-  Validator,
-} from '@angular/forms';
+import { ControlValueAccessor, NgControl, Validator } from '@angular/forms';
 import Inputmask from 'inputmask';
 
 @Directive({
   selector: '[inputMask]',
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: InputMaskDirective,
-      multi: true,
-    },
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: InputMaskDirective,
-      multi: true,
-    },
-  ],
+  providers: [],
 })
 export class InputMaskDirective<T = any>
-  implements Validator, AfterViewInit, ControlValueAccessor {
+  implements OnInit, AfterViewInit, ControlValueAccessor, Validator {
   /**
    *Helps you to create input-mask based on https://github.com/RobinHerbots/Inputmask
    *Supports form-validation out-of-the box.
@@ -38,17 +26,43 @@ export class InputMaskDirective<T = any>
   @Input() inputMask: InputmaskOptions<T> = {};
   inputMaskPlugin: Inputmask.Instance | undefined;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    @Optional() @Self() public ngControl: NgControl
+  ) {
+    if (this.ngControl != null) {
+      this.ngControl.valueAccessor = this;
+    }
+  }
 
   @HostListener('input', ['$event.target.value'])
   onInput = (_: any) => {};
+
+  ngOnInit() {
+    this.ngControl?.control?.setValidators([this.validate.bind(this)]);
+    this.ngControl?.control?.updateValueAndValidity();
+  }
+
+  ngAfterViewInit() {
+    if (Object.keys(this.inputMask).length) {
+      this.inputMaskPlugin = new Inputmask(this.inputMaskOptions).mask(
+        this.elementRef.nativeElement
+      );
+      setTimeout(() => {
+        this.ngControl?.control?.updateValueAndValidity();
+      });
+    }
+  }
 
   get inputMaskOptions(): Inputmask.Options {
     const { parser, ...options } = this.inputMask;
     return options;
   }
 
-  writeValue(value: string): void {}
+  writeValue(value: string): void {
+    this.renderer.setProperty(this.elementRef.nativeElement, 'value', value);
+  }
 
   registerOnChange(fn: (_: T | null) => void): void {
     const parser = this.inputMask.parser;
@@ -58,14 +72,6 @@ export class InputMaskDirective<T = any>
   }
 
   registerOnTouched(fn: any): void {}
-
-  ngAfterViewInit() {
-    if (Object.keys(this.inputMask).length) {
-      this.inputMaskPlugin = new Inputmask(this.inputMaskOptions).mask(
-        this.elementRef.nativeElement
-      );
-    }
-  }
 
   validate(): { [key: string]: any } | null {
     return this.inputMaskPlugin && this.inputMaskPlugin.isValid()
