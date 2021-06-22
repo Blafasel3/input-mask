@@ -1,3 +1,10 @@
+## [1.0.1-beta.1](https://github.com/ngneat/input-mask/compare/v1.0.0...v1.0.1-beta.1) (2021-06-22)
+
+
+### Bug Fixes
+
+* **input-mask.directive:** render input with initial value passed in form-control ([fe8a166](https://github.com/ngneat/input-mask/commit/fe8a166683c9bf3e81229cf5971862b2740c70fb)), closes [#3](https://github.com/ngneat/input-mask/issues/3)
+
 # 1.0.0 (2021-05-18)
 
 
