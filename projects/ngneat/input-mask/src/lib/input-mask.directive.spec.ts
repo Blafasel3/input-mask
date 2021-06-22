@@ -8,6 +8,7 @@ import { InputMaskModule } from './input-mask.module';
   template: `
     <input class="date" [inputMask]="dateMask" [formControl]="dateFC" />
     <input class="ip" [inputMask]="ipAddressMask" [formControl]="ipFC" />
+    <input class="initDate" [inputMask]="dateMask" [formControl]="initDateFC" />
   `,
 })
 class TestComponent {
@@ -23,6 +24,7 @@ class TestComponent {
     },
   });
   dateFC = new FormControl('');
+  initDateFC = new FormControl('28/02/1992');
 
   ipAddressMask = createMask({ alias: 'ip' });
   ipFC = new FormControl('');
@@ -62,5 +64,10 @@ describe('InputMaskDirective', () => {
     expect(spectator.component.dateFC.invalid).toBeTrue();
     spectator.typeInElement('abcd', '.ip');
     expect(spectator.component.ipFC.invalid).toBeTrue();
+  });
+
+  it('should render with initial value', () => {
+    const input = spectator.query('.initDate') as HTMLInputElement;
+    expect(input.value).toEqual('28/02/1992');
   });
 });
