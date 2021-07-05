@@ -4,6 +4,7 @@ import {
   ElementRef,
   HostListener,
   Input,
+  OnDestroy,
   OnInit,
   Optional,
   Renderer2,
@@ -17,7 +18,7 @@ import Inputmask from 'inputmask';
   providers: [],
 })
 export class InputMaskDirective<T = any>
-  implements OnInit, AfterViewInit, ControlValueAccessor, Validator {
+  implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor, Validator {
   /**
    *Helps you to create input-mask based on https://github.com/RobinHerbots/Inputmask
    *Supports form-validation out-of-the box.
@@ -42,6 +43,10 @@ export class InputMaskDirective<T = any>
   ngOnInit() {
     this.ngControl?.control?.setValidators([this.validate.bind(this)]);
     this.ngControl?.control?.updateValueAndValidity();
+  }
+
+  ngOnDestroy(): void {
+    this.inputMaskPlugin?.remove();
   }
 
   ngAfterViewInit() {
