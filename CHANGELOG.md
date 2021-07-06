@@ -1,3 +1,11 @@
+## [1.0.2](https://github.com/ngneat/input-mask/compare/v1.0.1...v1.0.2) (2021-07-06)
+
+
+### Bug Fixes
+
+* make server-side compatible ([56d0c3c](https://github.com/ngneat/input-mask/commit/56d0c3cbcd057bb1b29c2f0b8e9f329ace268872))
+* remove event listeners when the directive is destroyed ([82ec936](https://github.com/ngneat/input-mask/commit/82ec93688e9701d096771ec03ca410e1ce515f23))
+
 ## [1.0.1](https://github.com/ngneat/input-mask/compare/v1.0.0...v1.0.1) (2021-06-22)
 
 
