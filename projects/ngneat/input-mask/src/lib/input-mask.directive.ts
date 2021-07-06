@@ -1,21 +1,21 @@
+import { isPlatformServer } from '@angular/common';
 import {
   AfterViewInit,
   Directive,
   ElementRef,
   HostListener,
+  Inject,
   Input,
   OnInit,
   Optional,
+  PLATFORM_ID,
   Renderer2,
   Self,
 } from '@angular/core';
 import { ControlValueAccessor, NgControl, Validator } from '@angular/forms';
 import Inputmask from 'inputmask';
 
-@Directive({
-  selector: '[inputMask]',
-  providers: [],
-})
+@Directive({ selector: '[inputMask]' })
 export class InputMaskDirective<T = any>
   implements OnInit, AfterViewInit, ControlValueAccessor, Validator {
   /**
@@ -27,6 +27,7 @@ export class InputMaskDirective<T = any>
   inputMaskPlugin: Inputmask.Instance | undefined;
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: string,
     private elementRef: ElementRef,
     private renderer: Renderer2,
     @Optional() @Self() public ngControl: NgControl
@@ -45,6 +46,10 @@ export class InputMaskDirective<T = any>
   }
 
   ngAfterViewInit() {
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
+
     if (Object.keys(this.inputMask).length) {
       this.inputMaskPlugin = new Inputmask(this.inputMaskOptions).mask(
         this.elementRef.nativeElement
