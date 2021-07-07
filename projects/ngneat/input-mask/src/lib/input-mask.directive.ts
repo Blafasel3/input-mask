@@ -13,7 +13,12 @@ import {
   Renderer2,
   Self,
 } from '@angular/core';
-import { ControlValueAccessor, NgControl, Validator } from '@angular/forms';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  NgControl,
+  Validator,
+} from '@angular/forms';
 import Inputmask from 'inputmask';
 
 @Directive({ selector: '[inputMask]' })
@@ -41,9 +46,12 @@ export class InputMaskDirective<T = any>
   @HostListener('input', ['$event.target.value'])
   onInput = (_: any) => {};
 
+  @HostListener('blur', ['$event.target.value'])
+  onBlur = (_: any): void => {};
+
   ngOnInit() {
-    this.ngControl?.control?.setValidators([this.validate.bind(this)]);
-    this.ngControl?.control?.updateValueAndValidity();
+    this.getFormControl()?.setValidators([this.validate.bind(this)]);
+    this.getFormControl()?.updateValueAndValidity();
   }
 
   ngOnDestroy(): void {
@@ -60,7 +68,7 @@ export class InputMaskDirective<T = any>
         this.elementRef.nativeElement
       );
       setTimeout(() => {
-        this.ngControl?.control?.updateValueAndValidity();
+        this.getFormControl()?.updateValueAndValidity();
       });
     }
   }
@@ -75,18 +83,32 @@ export class InputMaskDirective<T = any>
   }
 
   registerOnChange(fn: (_: T | null) => void): void {
-    const parser = this.inputMask.parser;
-    this.onInput = (value) => {
-      fn(parser ? parser(value) : value);
-    };
+    if (this.getFormControl()?.updateOn === 'change') {
+      const parser = this.inputMask.parser;
+      this.onInput = (value) => {
+        fn(parser ? parser(value) : value);
+      };
+    }
   }
 
-  registerOnTouched(fn: any): void {}
+  registerOnTouched(fn: () => void): void {
+    if (this.getFormControl()?.updateOn === 'blur') {
+      const parser = this.inputMask.parser;
+      this.onBlur = (value): void => {
+        this.getFormControl()?.setValue(parser ? parser(value) : value);
+        fn();
+      };
+    }
+  }
 
   validate(): { [key: string]: any } | null {
     return this.inputMaskPlugin && this.inputMaskPlugin.isValid()
       ? null
       : { inputMask: false };
+  }
+
+  private getFormControl(): AbstractControl | null {
+    return this.ngControl?.control;
   }
 }
 

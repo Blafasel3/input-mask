@@ -34,4 +34,5 @@ export class AppComponent {
   ipAddressMask = createMask({ alias: 'ip' });
   ipAddress = new FormControl('');
   dateFC = new FormControl('');
+  dateBlurFC = new FormControl('', { updateOn: 'blur' });
 }

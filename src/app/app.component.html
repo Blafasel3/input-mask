@@ -27,3 +27,11 @@ Valid: {{ ipAddress.valid }} | Value: {{ ipAddress.value }} | Errors:
 <input [formControl]="dateFC" [inputMask]="dateInputMask" placeholder="Date" />
 Valid: {{ dateFC.valid }} | Value: {{ dateFC.value }} | Errors:
 {{ dateFC.errors | json }}
+<p>-------------- update Value on blur</p>
+<input
+  placeholder="Date"
+  [formControl]="dateBlurFC"
+  [inputMask]="dateInputMask"
+/>
+Valid: {{ dateBlurFC.valid }} | Value: {{ dateBlurFC.value }} | Errors:
+{{ dateBlurFC.errors | json }}
