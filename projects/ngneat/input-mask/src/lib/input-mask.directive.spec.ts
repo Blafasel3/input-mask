@@ -82,8 +82,12 @@ describe('InputMaskDirective', () => {
     spectator.typeInElement('28021992', '.dateOnBlur');
     expect(input.value).toEqual('28/02/1992');
     expect(spectator.component.dateBlurFC.value).toBeFalsy();
+    expect(spectator.component.dateBlurFC.dirty).toBeFalse();
+    expect(spectator.component.dateBlurFC.touched).toBeFalse();
     spectator.blur('.dateOnBlur');
     expect(input.value).toEqual('28/02/1992');
     expect(spectator.component.dateBlurFC.value).toEqual(new Date(1992, 1, 28));
+    expect(spectator.component.dateBlurFC.dirty).toBeTrue();
+    expect(spectator.component.dateBlurFC.touched).toBeTrue();
   });
 });
