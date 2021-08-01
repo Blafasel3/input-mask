@@ -52,9 +52,9 @@ export class InputMaskDirective<T = any>
   onBlur = (_: any) => {};
 
   ngOnInit() {
-    this.getFormControl()?.setValidators([this.validate.bind(this)]);
-    this.getFormControl()?.updateValueAndValidity();
-    this.formInitialValue = this.getFormControl()?.value;
+    this.formControl?.setValidators([this.validate.bind(this)]);
+    this.formControl?.updateValueAndValidity();
+    this.formInitialValue = this.formControl?.value;
   }
 
   ngOnDestroy(): void {
@@ -72,7 +72,7 @@ export class InputMaskDirective<T = any>
       );
 
       setTimeout(() => {
-        this.getFormControl()?.updateValueAndValidity();
+        this.formControl?.updateValueAndValidity();
       });
     }
   }
@@ -115,14 +115,14 @@ export class InputMaskDirective<T = any>
       : { inputMask: false };
   }
 
-  private getFormControl(): AbstractControl | null {
+  private get formControl(): AbstractControl | null {
     return this.ngControl?.control;
   }
 
   private formControlHasUpdateStrategy(
     updateStrategy: 'change' | 'blur' | 'submit'
   ) {
-    return this.getFormControl()?.updateOn === updateStrategy;
+    return this.formControl?.updateOn === updateStrategy;
   }
 
   private onChange: (_: T | null) => void = (_: any) => {};
