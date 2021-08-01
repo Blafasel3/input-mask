@@ -3,6 +3,7 @@ import {
   AfterViewInit,
   Directive,
   ElementRef,
+  HostListener,
   Inject,
   Input,
   OnDestroy,
@@ -44,7 +45,11 @@ export class InputMaskDirective<T = any>
     }
   }
 
+  @HostListener('input', ['$event.target.value'])
   onInput = (_: any) => {};
+
+  @HostListener('blur', ['$event.target.value'])
+  onBlur = (_: any) => {};
 
   ngOnInit() {
     this.getFormControl()?.setValidators([this.validate.bind(this)]);
@@ -66,8 +71,6 @@ export class InputMaskDirective<T = any>
         this.elementRef.nativeElement
       );
 
-      this.setupEventListenerForFormControl();
-
       setTimeout(() => {
         this.getFormControl()?.updateValueAndValidity();
       });
@@ -85,7 +88,7 @@ export class InputMaskDirective<T = any>
 
   registerOnChange(fn: (_: T | null) => void): void {
     this.onChange = fn;
-    if (this.getFormControl()?.updateOn === 'change') {
+    if (this.formControlHasUpdateStrategy('change')) {
       const parser = this.inputMask.parser;
       this.onInput = (value) => {
         fn(parser ? parser(value) : value);
@@ -94,11 +97,11 @@ export class InputMaskDirective<T = any>
   }
 
   registerOnTouched(fn: () => void): void {
-    if (this.getFormControl()?.updateOn === 'blur') {
+    if (this.formControlHasUpdateStrategy('blur')) {
       const parser = this.inputMask.parser;
-      this.onInput = (value): void => {
+      this.onBlur = (value): void => {
         const newValue = parser ? parser(value) : value;
-        this.onChange(newValue); // 2 discuss
+        this.onChange(newValue);
         if (this.formInitialValue !== value) {
           fn();
         }
@@ -116,16 +119,10 @@ export class InputMaskDirective<T = any>
     return this.ngControl?.control;
   }
 
-  private setupEventListenerForFormControl() {
-    if (this.getFormControl() != null) {
-      const updateOn = this.getFormControl()?.updateOn;
-      const eventName = updateOn === 'blur' ? 'blur' : 'input';
-      this.renderer.listen(
-        this.elementRef.nativeElement,
-        eventName,
-        (event: any) => this.onInput(event.target.value)
-      );
-    }
+  private formControlHasUpdateStrategy(
+    updateStrategy: 'change' | 'blur' | 'submit'
+  ) {
+    return this.getFormControl()?.updateOn === updateStrategy;
   }
 
   private onChange: (_: T | null) => void = (_: any) => {};

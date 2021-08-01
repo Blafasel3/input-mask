@@ -25,6 +25,10 @@ class TestComponent {
       const year = +values[2];
       const month = +values[1] - 1;
       const date = +values[0];
+      if (isNaN(date) && isNaN(month) && isNaN(year)) {
+        // + empty string returns 0
+        return null;
+      }
       return new Date(year, month, date);
     },
   });
